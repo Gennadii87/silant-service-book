@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError
 from .models import Machine, Maintenance, Claim, Client, ServiceCompany
 
 
-# Форма записи о машине
 class MachineForm(forms.ModelForm):
     shipment_date = forms.DateField(
         widget=forms.widgets.DateInput(attrs={'type': 'date'}),
