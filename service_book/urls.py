@@ -1,6 +1,8 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from allauth.account.views import LoginView, PasswordResetView
 from .views import *
+
 
 router = DefaultRouter()
 router.register(r'machines', MachineViewSet, basename='machines')
@@ -9,6 +11,8 @@ router.register(r'claims', ClaimViewSet, basename='claims')
 
 
 urlpatterns = [
+    path('accounts/login/', LoginView.as_view(), name='account_login'),
+    path('accounts/password/reset/', PasswordResetView.as_view(), name='account_reset_password'),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('', MachineList.as_view(), name='machine_list'),

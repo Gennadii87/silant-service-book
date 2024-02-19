@@ -188,11 +188,10 @@ class Maintenance(models.Model):
     maintenance_company = models.ForeignKey(MaintenanceCompany, on_delete=models.CASCADE,
                                             verbose_name='Организация, проводившая ТО')
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE, verbose_name='Машина')
-    # Задается в save по машине
     service_company = models.ForeignKey(ServiceCompany, on_delete=models.CASCADE, verbose_name='Сервисная компания')
 
     def save(self, *args, **kwargs):
-        self.service_company = self.machine.service_company  # сервисная компания закреплена за каждой машиной
+        self.service_company = self.machine.service_company
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -217,8 +216,8 @@ class Claim(models.Model):
     service_company = models.ForeignKey(ServiceCompany, on_delete=models.CASCADE, verbose_name='Сервисная компания')
 
     def save(self, *args, **kwargs):
-        self.downtime = (self.recovery_date - self.refusal_date).days  # время простоя техники в днях
-        self.service_company = self.machine.service_company  # сервисная компания закреплена за каждой машиной
+        self.downtime = (self.recovery_date - self.refusal_date).days
+        self.service_company = self.machine.service_company
         super().save(*args, **kwargs)
 
     def __str__(self):
