@@ -1,0 +1,17 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Удаление записи о машине
+{% endblock title %}
+
+{% block content %}
+<div class="delete-info">
+    <h1>Удаление записи о машине</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Удалить машину с заводским номером {{ machine.number_machine }}?</p>
+        <input type="submit" value="Удалить">
+    </form>
+</div>
+<div class="div_buttom"><a class="a_buttom" href="/"><button class="back_button">Назад</button></a></div>
+{% endblock content %}

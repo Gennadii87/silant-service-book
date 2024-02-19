@@ -1,0 +1,20 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Техническое обслуживание
+{% endblock title %}
+
+{% block content %}
+<div class="edit-info">
+    <h1>Добавление/редактирование информации о техническом обслуживании</h1>
+
+</div>
+<div class="all_form_wrapper">
+    <form class="maintenance_form" action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="button_form_all" type="submit" value="Сохранить"/>
+    </form>
+ </div>
+<div class="div_buttom"><a class="a_buttom" href="/"><button class="back_button">Назад</button></a></div>
+{% endblock content %}

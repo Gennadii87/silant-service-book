@@ -1,0 +1,118 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_tags %}
+
+{% block title %}
+ТО
+{% endblock title %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <div class="user-title">
+            <h2>Информация о комплектации и технических характеристиках вашей техники</h2>
+        </div>
+    {% endif %}
+    <div class="tabs">
+        {% if request.user.is_authenticated %}
+            <div class="image-tab">
+                <img width="40px" height="30px" src="/static/images/machine.jpg" alt="Машина">
+                <a class="inactive-tab" href="/">
+                    Машины
+                </a>
+            </div>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+            <div class="image-tab">
+                <img width="30px" height="30px" src="/static/images/maintenance.jpg" alt="ТО">
+                <a class="active-tab" href="/maintenances/">
+                    Техническое обслуживание
+                </a>
+            </div>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+            <div class="image-tab">
+                <img height="30px" src="/static/images/claim.jpg" alt="Рекламация">
+                <a class="inactive-tab" href="/claims">
+                    Рекламации
+                </a>
+            </div>
+        {% endif %}
+        {% if perms.mySilant.add_maintenance %}
+            <a class="inactive-tab" href="/maintenances/create/">
+                Добавить запись о ТО
+            </a>
+        {% endif %}
+    </div>
+    <div class="form-search">
+        <form action="" method="get">
+            {{ filter_set.form }}
+            <input class="button_search" type="submit" value="Искать" />
+        </form>
+    </div>
+    {% if maintenances %}
+<div class="main-table_wrapper">
+    <div class="maintenances_table">
+        <table>
+            <tr>
+                <th>Дата проведения ТО</th>
+                <th>Заводской № машины</th>
+                <th>Вид ТО</th>
+                <th>Наработка, м/час</th>
+                <th>Номер заказ-наряда</th>
+                <th>Дата заказ-наряда</th>
+                <th>Организация, проводившая ТО</th>
+                <th>Сервисная компания</th>
+            </tr>
+            {% for maintenance in maintenances %}
+            <tr>
+                <td>
+                    <a href="{% url 'maintenance_detail' maintenance.pk %}">
+                        {{ maintenance.maintenance_date|date:'d.m.Y' }}
+                    </a>
+                </td>
+                <td><a href="{% url 'machine_detail' maintenance.machine.pk %}">{{ maintenance.machine }}</a></td>
+                <td><a href="{% url 'typemaintenance_detail' maintenance.type.pk %}">{{ maintenance.type }}</a></td>
+                <td>{{ maintenance.operating_time }}</td>
+                <td>{{ maintenance.order_number }}</td>
+                <td>{{ maintenance.order_date|date:'d.m.Y' }}</td>
+                <td>
+                    <a href="{% url 'maintenancecompany_detail' maintenance.maintenance_company.pk %}">
+                        {{ maintenance.maintenance_company }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'servicecompany_detail' maintenance.service_company.pk %}">
+                        {{ maintenance.service_company }}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+    {% else %}
+        <div class="empty-list">
+            <h2>ТО с такими параметрами в базе данных не найдено!</h2>
+        </div>
+    {% endif %}
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <p><a href="?{% url_replace page=1 %}" >1</a></p>
+            {% if page_obj.previous_page_number != 1 %}
+            <p>...</p>
+            <p><a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a></p>
+            {% endif %}
+        {% endif %}
+
+        <p>{{ page_obj.number }}</p>
+
+        {% if page_obj.has_next %}
+            <p><a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a></p>
+            {% if paginator.num_pages != page_obj.next_page_number %}
+                <p>...</p>
+                <p><a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a></p>
+           {% endif %}
+       {% endif %}
+    </div>
+{% endblock content %}

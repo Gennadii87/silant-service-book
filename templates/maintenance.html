@@ -1,0 +1,68 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+ТО
+{% endblock title %}
+
+{% block content %}
+    <div class="user-title">
+        <h2>Информация о техническом обслуживании</h2>
+    </div>
+    <div class="tabs">
+        {% if perms.silant.change_maintenance %}
+            <a class="inactive-tab" href="/maintenances/{{ maintenance.pk }}/edit/">
+                Редактировать
+            </a>
+        {% endif %}
+        {% if perms.silant.delete_maintenance %}
+            <a class="inactive-tab" href="/maintenances/{{ maintenance.pk }}/delete/">
+                Удалить
+            </a>
+        {% endif %}
+    </div>
+<div class="main-table_wrapper">
+    <table class="maintenance_form_table">
+        <tr>
+            <th>Параметр</th>
+            <th>Значение</th>
+            <th>Описание</th>
+        </tr>
+        <tr>
+            <td>Заводской № машины</td>
+            <td>{{ maintenance.machine }}</td>
+        </tr>
+        <tr>
+            <td>Вид ТО</td>
+            <td>{{ maintenance.type }}</td>
+            <td>{{ maintenance.type.description }}</td>
+        </tr>
+        <tr>
+            <td>Дата проведения ТО</td>
+            <td>{{ maintenance.maintenance_date|date:'d.m.Y' }}</td>
+        </tr>
+        <tr>
+            <td>Наработка, м/час</td>
+            <td>{{ maintenance.operating_time }}</td>
+        </tr>
+        <tr>
+            <td>Номер заказ-наряда</td>
+            <td>{{ maintenance.order_number }}</td>
+        </tr>
+        <tr>
+            <td >Дата заказ-наряда</td>
+            <td>{{ maintenance.order_date|date:'d.m.Y' }}</td>
+        </tr>
+        <tr>
+            <td>Организация, проводившая ТО</td>
+            <td>{{ maintenance.maintenance_company }}</td>
+            <td>{{ maintenance.maintenance_company.description }}</td>
+        </tr>
+        <tr>
+            <td>Сервисная компания</td>
+            <td>{{ maintenance.service_company }}</td>
+            <td>{{ maintenance.service_company.description }}</td>
+        </tr>
+    </table>
+</div>
+<div class="div_buttom"><a class="a_buttom" href="/"><button class="back_button">Назад</button></a></div>
+{% endblock content %}

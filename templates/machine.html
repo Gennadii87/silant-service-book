@@ -1,0 +1,110 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Машина
+{% endblock title %}
+
+{% block content %}
+    <div class="user-title">
+        <h2>Информация о машине</h2>
+    </div>
+    <div class="tabs">
+        {% if perms.silant.change_machine %}
+            <a class="inactive-tab" href="/machines/{{ machine.pk }}/edit/">
+                Редактировать
+            </a>
+        {% endif %}
+        {% if perms.silant.delete_machine %}
+            <a class="inactive-tab" href="/machines/{{ machine.pk }}/delete/">
+                Удалить
+            </a>
+        {% endif %}
+    </div>
+<div class="main-table_wrapper">
+    <table cellpadding="5" align="center" style="font-size: 14pt">
+        <tr>
+            <th>Параметр</th>
+            <th>Значение</th>
+            <th>Описание</th>
+        </tr>
+        <tr>
+            <td>Заводской № машины</td>
+            <td>{{ machine.number_machine }}</td>
+        </tr>
+        <tr>
+            <td>Модель техники</td>
+            <td>{{ machine.model_equipment }}</td>
+            <td>{{ machine.model_equipment.description }}</td>
+        </tr>
+        <tr>
+            <td>Модель двигателя</td>
+            <td>{{ machine.model_engine }}</td>
+            <td>{{ machine.model_engine.description }}</td>
+        </tr>
+        <tr>
+            <td>Заводской № двигателя</td>
+            <td>{{ machine.number_engine }}</td>
+        </tr>
+        <tr>
+            <td>Модель трансмиссии</td>
+            <td>{{ machine.model_transmission }}</td>
+            <td>{{ machine.model_transmission.description }}</td>
+        </tr>
+        <tr>
+            <td>Заводской № трансмиссии</td>
+            <td>{{ machine.number_transmission }}</td>
+        </tr>
+        <tr>
+            <td>Модель ведущего моста</td>
+            <td>{{ machine.model_driving_axle }}</td>
+            <td>{{ machine.model_driving_axle.description }}</td>
+        </tr>
+        <tr>
+            <td>Заводской № ведущего моста</td>
+            <td>{{ machine.number_driving_axle }}</td>
+        </tr>
+        <tr>
+            <td>Модель управляемого моста</td>
+            <td>{{ machine.model_steering_axle }}</td>
+            <td>{{ machine.model_steering_axle.description }}</td>
+        </tr>
+        <tr>
+            <td>Заводской № управляемого моста</td>
+            <td>{{ machine.number_steering_axle }}</td>
+        </tr>
+        <tr>
+            <td>Договор поставки</td>
+            <td>{{ machine.supply_contract }}</td>
+            <td>{{ machine.supply_contract.description }}</td>
+        </tr>
+        <tr>
+            <td>Дата отгрузки с завода</td>
+            <td>{{ machine.shipment_date|date:'d.m.Y' }}</td>
+        </tr>
+        <tr>
+            <td>Клиент</td>
+            <td>{{ machine.client }}</td>
+            <td>{{ machine.client.description }}</td>
+        </tr>
+        <tr>
+            <td>Конечный потребитель</td>
+            <td>{{ machine.end_consumer }}</td>
+        </tr>
+        <tr>
+            <td>Адрес поставки</td>
+            <td>{{ machine.shipping_address }}</td>
+        </tr>
+        <tr>
+            <td>Комплектация</td>
+            <td>{{ machine.options }}</td>
+        </tr>
+        <tr>
+            <td>Сервисная компания</td>
+            <td>{{ machine.service_company }}</td>
+            <td>{{ machine.service_company.description }}</td>
+        </tr>
+    </table>
+
+</div>
+ <div class="div_buttom"><a class="a_buttom" href="/"><button class="back_button">Назад</button></a></div>
+{% endblock content %}

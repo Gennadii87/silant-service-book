@@ -1,0 +1,11 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+  <h2>Logout</h2>
+  <p>Are you sure you want to logout?</p>
+  <form method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+  <p><a href="{% url 'account_login' %}">Cancel</a></p>
+{% endblock %}

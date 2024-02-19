@@ -1,0 +1,208 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_tags %}
+
+{% block title %}
+Машины
+{% endblock title %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+    <div class="user-title">
+        <h2>Информация о комплектации и технических характеристиках вашей техники</h2>
+    </div>
+{% endif %}
+<div class="tabs">
+    {% if request.user.is_authenticated %}
+        <div class="image-tab">
+            <img width="40px" height="35px" src="/static/images/machine.jpg" alt="Машина">
+            <a class="active-tab" href="/">
+                Машины
+            </a>
+        </div>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+        <div class="image-tab">
+            <img width="40px" height="35px" src="/static/images/maintenance.jpg" alt="ТО">
+            <a class="inactive-tab" href="/maintenances">
+                Техническое обслуживание
+            </a>
+        </div>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+        <div class="image-tab">
+            <img width="40px" height="35px" src="/static/images/claim.jpg" alt="Рекламация">
+            <a class="inactive-tab" href="/claims">
+                Рекламации
+            </a>
+        </div>
+    {% endif %}
+    {% if perms.mySilant.add_machine %}
+        <div class="image-tab">
+            <img width="40px" height="35px" src="/static/images/add.jpg" alt="Добавление">
+            <a class="inactive-tab" href="/machines/create/">
+                Добавить запись о машине
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% if not request.user.is_authenticated %}
+    <div class="title">
+        <h2>Проверьте комплектацию и технические характеристики техники Силант</h2>
+    </div>
+    <div class="form-search">
+        <form action="" method="get">
+            {{ filter_set.form }}
+            <input class="button_search" type="submit" value="Искать" />
+        </form>
+    </div>
+{% endif %}
+{% if request.user.is_authenticated %}
+    <div class="form-search">
+        <form action="" method="get">
+            {{ filter_set.form }}
+            <input class="button_search" type="submit" value="Искать" />
+        </form>
+    </div>
+{% endif %}
+<div class="main-table_wrapper">
+    {% if machines %}
+        <div class="main-table">
+            <table>
+                <tr>
+                    <th>Заводской № машины</th>
+                    <th>Модель техники</th>
+                    <th>Модель двигателя</th>
+                    <th>Заводской № двигателя</th>
+                    <th>Модель трансмиссии</th>
+                    <th>Заводской № трансмиссии</th>
+                    <th>Модель ведущего моста</th>
+                    <th>Заводской № ведущего моста</th>
+                    <th>Модель управляемого моста</th>
+                    <th>Заводской № управляемого моста</th>
+                    {% if request.user.is_authenticated %}
+                    <th>Договор поставки</th>
+                    <th>Дата отгрузки с завода</th>
+                    <th>Клиент</th>
+                    <th>Конечный потребитель</th>
+                    <th>Адрес поставки</th>
+                    <th>Комплектация</th>
+                    <th>Сервисная компания</th>
+                    {% endif %}
+                </tr>
+                {% for machine in machines %}
+                <tr>
+                    <td><a href="{% url 'machine_detail' machine.pk %}">{{ machine.number_machine }}</a></td>
+                    <td>
+                        <a href="{% url 'equipment_detail' machine.model_equipment.pk %}">{{ machine.model_equipment }}</a>
+                    </td>
+                    <td><a href="{% url 'engine_detail' machine.model_engine.pk %}">{{ machine.model_engine }}</a></td>
+                    <td>{{ machine.number_engine }}</td>
+                    <td>
+                        <a href="{% url 'transmission_detail' machine.model_transmission.pk %}">
+                            {{ machine.model_transmission }}
+                        </a>
+                    </td>
+                    <td>{{ machine.number_transmission }}</td>
+                    <td>
+                        <a href="{% url 'drivingaxle_detail' machine.model_driving_axle.pk %}">
+                            {{ machine.model_driving_axle }}
+                        </a>
+                    </td>
+                    <td>{{ machine.number_driving_axle }}</td>
+                    <td>
+                        <a href="{% url 'steeringaxle_detail' machine.model_steering_axle.pk %}">
+                            {{ machine.model_steering_axle }}
+                        </a>
+                    </td>
+                    <td>{{ machine.number_steering_axle }}</td>
+                    {% if request.user.is_authenticated %}
+                    <td>{{ machine.supply_contract }}</td>
+                    <td>{{ machine.shipment_date|date:'d.m.Y' }}</td>
+                    <td><a href="{% url 'client_detail' machine.client.pk %}">{{ machine.client }}</a></td>
+                    <td>{{ machine.end_consumer }}</td>
+                    <td>{{ machine.shipping_address }}</td>
+                    <td>{{ machine.options }}</td>
+                    <td>
+                        <a href="{% url 'servicecompany_detail' machine.service_company.pk %}">
+                            {{ machine.service_company }}
+                        </a>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+</div>
+{% else %}
+    <div class="empty-list">
+        <h2>Машин с такими характеристиками в базе данных не найдено, попробуйте изменить параметры запроса!</h2>
+    </div>
+{% endif %}
+<div class="pagination">
+    {% if paginator.num_pages > 1 %}
+        {% if page_obj.has_previous %}
+            <p><a href="?{% url_replace page=1 %}" >1</a></p>
+            {% if page_obj.previous_page_number != 1 %}
+                <p>...</p>
+                <p><a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a></p>
+            {% endif %}
+        {% endif %}
+
+        <p>{{ page_obj.number }}</p>
+
+        {% if page_obj.has_next %}
+            <p><a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a></p>
+            {% if paginator.num_pages != page_obj.next_page_number %}
+                <p>...</p>
+                <p><a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a></p>
+            {% endif %}
+       {% endif %}
+    {% endif %}
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(function(){
+        function resizeTableBox() {
+            $('.main-table').each(function(){
+                var boxWidth = $(this).outerWidth();
+                var tableWidth = $(this).find('table').prop('scrollWidth');
+                $(this).removeClass('scroll-left');
+                if (tableWidth > boxWidth) {
+                    $(this).addClass('scroll-right');
+                } else {
+                    $(this).removeClass('scroll-right');
+                }
+            });
+        }
+
+        resizeTableBox();
+        $(window).on('resize', function() {
+            resizeTableBox();
+        });
+
+        $('.main-table table').on('scroll', function() {
+            var parent = $(this).parent();
+            if ($(this).scrollLeft() + $(this).innerWidth() >= $(this)[0].scrollWidth) {
+                if (parent.hasClass('scroll-right')) {
+                    parent.removeClass('scroll-right');
+                }
+                parent.addClass('scroll-left');
+            } else if ($(this).scrollLeft() === 0) {
+                if (parent.hasClass('scroll-left')) {
+                    parent.removeClass('scroll-left');
+                }
+                parent.addClass('scroll-right');
+            } else {
+                if (!parent.hasClass('scroll-right')) {
+                    parent.addClass('scroll-right');
+                }
+                if (!parent.hasClass('scroll-left')) {
+                    parent.addClass('scroll-left');
+                }
+            }
+        });
+    });
+</script>
+{% endblock content %}

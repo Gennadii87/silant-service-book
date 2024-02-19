@@ -1,0 +1,76 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Рекламация
+{% endblock title %}
+
+{% block content %}
+    <div class="user-title">
+        <h2>Информация о рекламации</h2>
+    </div>
+    <div class="tabs">
+        {% if perms.silant.change_claim %}
+            <a class="inactive-tab" href="/claims/{{ claim.pk }}/edit/">
+                Редактировать
+            </a>
+        {% endif %}
+        {% if perms.silant.delete_claim %}
+            <a class="inactive-tab" href="/claims/{{ claim.pk }}/delete/">
+                Удалить
+            </a>
+        {% endif %}
+    </div>
+<div class="main-table_wrapper">
+    <table cellpadding="5" align="center" style="font-size: 14pt">
+        <tr>
+            <th>Параметр</th>
+            <th>Значение</th>
+            <th>Описание</th>
+        </tr>
+        <tr>
+            <td>Заводской № машины</td>
+            <td>{{ claim.machine }}</td>
+        </tr>
+        <tr>
+            <td>Дата отказа</td>
+            <td>{{ claim.refusal_date|date:'d.m.Y' }}</td>
+        </tr>
+        <tr>
+            <td>Наработка, м/час</td>
+            <td>{{ claim.operating_time }}</td>
+        </tr>
+        <tr>
+            <td>Узел отказа</td>
+            <td>{{ claim.refusal_node }}</td>
+            <td>{{ claim.refusal_node.description }}</td>
+        </tr>
+        <tr>
+            <td>Описание отказа</td>
+            <td>{{ claim.refusal_description }}</td>
+        </tr>
+        <tr>
+            <td>Способ восстановления</td>
+            <td>{{ claim.recovery_method }}</td>
+            <td>{{ claim.recovery_method.description }}</td>
+        </tr>
+        <tr>
+            <td>Используемые запасные части</td>
+            <td>{{ claim.repair_parts }}</td>
+        </tr>
+        <tr>
+            <td>Дата восстановления</td>
+            <td>{{ claim.recovery_date|date:'d.m.Y' }}</td>
+        </tr>
+        <tr>
+            <td>Время простоя, дни</td>
+            <td>{{ claim.downtime }}</td>
+        </tr>
+        <tr>
+            <td>Сервисная компания</td>
+            <td>{{ claim.service_company }}</td>
+            <td>{{ claim.service_company.description }}</td>
+        </tr>
+    </table>
+</div>
+<div class="div_buttom"><a class="a_buttom" href="/"><button class="back_button">Назад</button></a></div>
+{% endblock content %}
