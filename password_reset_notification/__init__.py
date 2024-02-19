@@ -1,0 +1,1 @@
+default_app_config = 'password_reset_notification.apps.PasswordResetNotificationConfig'
