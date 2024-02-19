@@ -11,8 +11,13 @@
     {% load static %}
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/account.style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/modal.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <script src="{% static 'scripts/script.js' %}"></script>
 </head>
+    {% block model %}
+        {% include 'modal.html' %}
+    {% endblock model %}
 <body>
     <header>
         <div class="info">
@@ -54,38 +59,38 @@
             <h1>Электронная сервисная книжка "Мой Силант"</h1>
         </div>
     </header>
-
         <main>
             {% if request.user.is_authenticated %}
         <div class="user-title">
             <h2 class="group_users">{{ request.user.groups.first.name }}:</h2>
             <h2 class="users">{{ request.user }}</h2>
         </div>
+
             {% endif %}
             <div class="content">
                 {% block content %}
-
+                     {{ flatpage.content }}
                 {% endblock %}
             </div>
         </main>
-    <footer>
-        <div class="info_foo">
-            <span>+7(8352)20-12-09</span>
-                <div class="info_foo_img">
-                    <a href="https://t.me/chzsa21">
-                        <img width="20px" src="{% static 'images/logotelegram.png' %}" alt="telegram">
+        <footer>
+            <div class="info_foo">
+                <span>+7(8352)20-12-09</span>
+                    <div class="info_foo_img">
+                        <a href="https://t.me/chzsa21">
+                            <img width="20px" src="{% static 'images/logotelegram.png' %}" alt="telegram">
+                        </a>
+                    </div>
+                </div>
+
+            <div class="info_foo">
+                <div class="info-item_foo">
+                    <a href="/">
+                        <img width="150px" src="{% static 'images/most2.png' %}" alt="logo">
                     </a>
                 </div>
+                <span>Сервисная книга «Силант»</span>
             </div>
-
-        <div class="info_foo">
-            <div class="info-item_foo">
-                <a href="/">
-                    <img width="150px" src="{% static 'images/most2.png' %}" alt="logo">
-                </a>
-            </div>
-            <span>Сервисная книга «Силант»</span>
-        </div>
-    </footer>
-</body>
+        </footer>
+    </body>
 </html>

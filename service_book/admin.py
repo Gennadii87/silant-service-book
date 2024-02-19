@@ -5,6 +5,10 @@ from .models import (
     TypeMaintenance, RefusalNode, RecoveryMethod, Machine, Maintenance, Claim, MaintenanceAdmin, ClaimAdmin
 )
 
+from django.contrib.flatpages.admin import FlatPageAdmin
+from django.contrib.flatpages.models import FlatPage
+from .forms import FlatPageForm
+
 
 # поля для Equipment
 class EquipmentAdmin(admin.ModelAdmin):
@@ -68,6 +72,13 @@ class MachineAdmin(admin.ModelAdmin):
                     'number_steering_axle', 'supply_contract', 'shipment_date', 'end_consumer', 'shipping_address',
                     'options', 'client', 'service_company')
 
+
+class CustomFlatPageAdmin(FlatPageAdmin):
+    form = FlatPageForm
+
+
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, CustomFlatPageAdmin)
 
 admin.site.register(Equipment, EquipmentAdmin)
 admin.site.register(Engine, EngineAdmin)

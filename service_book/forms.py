@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-
+from django.contrib.flatpages.models import FlatPage
 from .models import Machine, Maintenance, Claim, Client, ServiceCompany
 
 
@@ -191,3 +191,9 @@ class ClaimForm(forms.ModelForm):
                     "operating_time": "Наработка должна быть положительным числом"
                 })
         return cleaned_data
+
+
+class FlatPageForm(forms.ModelForm):
+    class Meta:
+        model = FlatPage
+        fields = '__all__'
