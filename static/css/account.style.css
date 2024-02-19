@@ -1,0 +1,121 @@
+/* login */
+.form_login_wrapper{
+    display: grid;
+    grid-template-columns: repeat(1, 160px);
+    align-items: center;
+    justify-content: center;
+    color: #163E6C;
+}
+.form_user_login label {
+    font-size: 20px;
+}
+
+.form_user_login a {
+    font-size:16px;
+}
+
+.form_user_login input {
+    color: #4eb42f;
+    margin: 4px 0 10px 0;
+    height: 30px;
+    font: 1em sans-serif;
+}
+
+.form_user_login button {
+    background-color: #163E6C;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    margin: 10px 0px 20px 0px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+  
+.form_user_login button:hover {
+    background-color: #45a049;
+}
+
+/* logout */
+.logaut_buttons {
+    background-color: #163E6C;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    margin: 10px 0px 20px 0px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.logaut_buttons:hover {
+    background-color: #45a049;
+}
+
+/* reset */
+
+.form_pass_reset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #163E6C;
+}
+.pass_reset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #1e426b;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    margin: 10px 0px 20px 0px;
+    border-radius: 8px;
+}
+
+.pass_reset > .button_reset  {
+    display: flex;
+    justify-items: center;
+    text-align: center;
+    margin: 10px 0px 20px 0px;
+    border-radius: 4px;
+}
+
+.button_reset {
+    background-color: #123257;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.button_reset:hover {
+    background-color: #dadada;
+    font-size: 16px;
+    color: #123257;
+}
+
+.pass_reset label {
+    font-size: 20px;
+}
+
+.pass_reset .alert {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.pass_reset input {
+    align-items: center;
+    justify-content: center;
+    color: #163E6C;
+    margin: 4px 0 10px 0;
+    height: 30px;
+    font: 1em sans-serif;
+    cursor: pointer;
+}

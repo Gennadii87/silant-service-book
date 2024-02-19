@@ -1,11 +1,14 @@
 {% extends 'flatpages/default.html' %}
 
 {% block content %}
-  <!-- Ваш контент для формы авторизации здесь -->
-  <h2>{% load i18n %}{% trans 'Login' %}</h2>
-  <form method="post" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% trans 'Login' %}</button>
-  </form>
+<div class="form_login_wrapper">
+  <div class="form_login">
+    <h2>{% load i18n %}{% trans 'Авторизоваться' %}</h2>
+    <form class="form_user_login" method="post" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="" type="submit">{% trans 'Войти' %}</button>
+    </form>
+  </div>
+</div>
 {% endblock %}
