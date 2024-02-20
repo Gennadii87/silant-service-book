@@ -9,12 +9,12 @@
         <h2>Информация о рекламации</h2>
     </div>
     <div class="tabs">
-        {% if perms.silant.change_claim %}
+        {% if perms.service_book.change_claim %}
             <a class="inactive-tab" href="/claims/{{ claim.pk }}/edit/">
                 Редактировать
             </a>
         {% endif %}
-        {% if perms.silant.delete_claim %}
+        {% if perms.service_book.delete_claim %}
             <a class="inactive-tab" href="/claims/{{ claim.pk }}/delete/">
                 Удалить
             </a>

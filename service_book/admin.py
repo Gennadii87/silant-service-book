@@ -1,5 +1,3 @@
-from django.contrib import admin
-
 from .models import (
     Equipment, Engine, Transmission, DrivingAxle, SteeringAxle, Client, ServiceCompany, MaintenanceCompany,
     TypeMaintenance, RefusalNode, RecoveryMethod, Machine, Maintenance, Claim, MaintenanceAdmin, ClaimAdmin
@@ -8,6 +6,18 @@ from .models import (
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 from .forms import FlatPageForm
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+
+
+class CustomUserAdmin(UserAdmin):
+    list_display = UserAdmin.list_display + ('get_user_groups',)
+
+    def get_user_groups(self, obj):
+        return ", ".join([group.name for group in obj.groups.all()])
+
+    get_user_groups.short_description = 'Группа'
 
 
 # поля для Equipment
@@ -94,3 +104,6 @@ admin.site.register(RecoveryMethod, RecoveryMethodAdmin)
 admin.site.register(Machine, MachineAdmin)
 admin.site.register(Maintenance, MaintenanceAdmin)
 admin.site.register(Claim, ClaimAdmin)
+
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)

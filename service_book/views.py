@@ -62,7 +62,7 @@ class MachineList(ListView):
 
 # Подробности по каждой машине
 class MachineDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_machine'
+    permission_required = 'service_book.view_machine'
     model = Machine
     template_name = 'machine.html'
     context_object_name = 'machine'
@@ -89,7 +89,7 @@ class MachineDetail(PermissionRequiredMixin, DetailView):
 
 # Создание записи о новой машине с проверкой прав
 class MachineCreate(PermissionRequiredMixin, CreateView):
-    permission_required = 'mySilant.add_machine'
+    permission_required = 'service_book.add_machine'
     form_class = MachineForm
     model = Machine
     template_name = 'machine_edit.html'
@@ -98,7 +98,7 @@ class MachineCreate(PermissionRequiredMixin, CreateView):
 
 # Редактирование записи о машине с проверкой прав
 class MachineEdit(PermissionRequiredMixin, UpdateView):
-    permission_required = 'mySilant.change_machine'
+    permission_required = 'service_book.change_machine'
     form_class = MachineForm
     model = Machine
     template_name = 'machine_edit.html'
@@ -107,7 +107,7 @@ class MachineEdit(PermissionRequiredMixin, UpdateView):
 
 # Удаление записи о машине с проверкой прав
 class MachineDelete(PermissionRequiredMixin, DeleteView):
-    permission_required = 'mySilant.delete_machine'
+    permission_required = 'service_book.delete_machine'
     model = Machine
     template_name = 'machine_delete.html'
     success_url = reverse_lazy('machine_list')
@@ -115,7 +115,7 @@ class MachineDelete(PermissionRequiredMixin, DeleteView):
 
 # Вывод списка ТО с проверкой прав
 class MaintenanceList(PermissionRequiredMixin, ListView):
-    permission_required = 'mySilant.view_maintenance'
+    permission_required = 'service_book.view_maintenance'
     model = Maintenance
     ordering = 'maintenance_date'
     template_name = 'maintenances.html'
@@ -154,7 +154,7 @@ class MaintenanceList(PermissionRequiredMixin, ListView):
 
 # Подробности по каждому ТО с проверкой прав
 class MaintenanceDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_maintenance'
+    permission_required = 'service_book.view_maintenance'
     model = Maintenance
     template_name = 'maintenance.html'
     context_object_name = 'maintenance'
@@ -181,7 +181,7 @@ class MaintenanceDetail(PermissionRequiredMixin, DetailView):
 
 # Создание записи о новом ТО с проверкой прав
 class MaintenanceCreate(PermissionRequiredMixin, CreateView):
-    permission_required = 'mySilant.add_maintenance'
+    permission_required = 'service_book.add_maintenance'
     form_class = MaintenanceForm
     model = Maintenance
     template_name = 'maintenance_edit.html'
@@ -197,7 +197,7 @@ class MaintenanceCreate(PermissionRequiredMixin, CreateView):
 
 # Редактирование записи о ТО с проверкой прав
 class MaintenanceEdit(PermissionRequiredMixin, UpdateView):
-    permission_required = 'mySilant.change_maintenance'
+    permission_required = 'service_book.change_maintenance'
     form_class = MaintenanceForm
     model = Maintenance
     template_name = 'maintenance_edit.html'
@@ -232,7 +232,7 @@ class MaintenanceEdit(PermissionRequiredMixin, UpdateView):
 
 # Удаление записи о ТО с проверкой прав
 class MaintenanceDelete(PermissionRequiredMixin, DeleteView):
-    permission_required = 'mySilant.delete_maintenance'
+    permission_required = 'service_book.delete_maintenance'
     model = Maintenance
     template_name = 'maintenance_delete.html'
     success_url = reverse_lazy('maintenance_list')
@@ -259,7 +259,7 @@ class MaintenanceDelete(PermissionRequiredMixin, DeleteView):
 
 # Вывод списка рекламаций с проверкой прав
 class ClaimList(PermissionRequiredMixin, ListView):
-    permission_required = 'mySilant.view_claim'
+    permission_required = 'service_book.view_claim'
     model = Claim
     ordering = 'refusal_date'
     template_name = 'claims.html'
@@ -298,7 +298,7 @@ class ClaimList(PermissionRequiredMixin, ListView):
 
 # Подробности по каждой рекламации
 class ClaimDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_claim'
+    permission_required = 'service_book.view_claim'
     model = Claim
     template_name = 'claim.html'
     context_object_name = 'claim'
@@ -325,7 +325,7 @@ class ClaimDetail(PermissionRequiredMixin, DetailView):
 
 # Создание записи о новой рекламации с проверкой прав
 class ClaimCreate(PermissionRequiredMixin, CreateView):
-    permission_required = 'mySilant.add_claim'
+    permission_required = 'service_book.add_claim'
     form_class = ClaimForm
     model = Claim
     template_name = 'claim_edit.html'
@@ -341,7 +341,7 @@ class ClaimCreate(PermissionRequiredMixin, CreateView):
 
 # Редактирование записи о рекламации с проверкой прав
 class ClaimEdit(PermissionRequiredMixin, UpdateView):
-    permission_required = 'mySilant.change_claim'
+    permission_required = 'service_book.change_claim'
     form_class = ClaimForm
     model = Claim
     template_name = 'claim_edit.html'
@@ -376,7 +376,7 @@ class ClaimEdit(PermissionRequiredMixin, UpdateView):
 
 # Удаление записи о рекламации с проверкой прав
 class ClaimDelete(PermissionRequiredMixin, DeleteView):
-    permission_required = 'mySilant.delete_claim'
+    permission_required = 'service_book.delete_claim'
     model = Claim
     template_name = 'claim_delete.html'
     success_url = reverse_lazy('claim_list')
@@ -403,7 +403,7 @@ class ClaimDelete(PermissionRequiredMixin, DeleteView):
 
 # Справочное описание модели техники
 class EquipmentDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_equipment'
+    permission_required = 'service_book.view_equipment'
     model = Equipment
     template_name = 'reference.html'
     context_object_name = 'reference'
@@ -411,7 +411,7 @@ class EquipmentDetail(PermissionRequiredMixin, DetailView):
 
 # Справочное описание модели двигателя
 class EngineDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_engine'
+    permission_required = 'service_book.view_engine'
     model = Engine
     template_name = 'reference.html'
     context_object_name = 'reference'
@@ -419,7 +419,7 @@ class EngineDetail(PermissionRequiredMixin, DetailView):
 
 # Справочное описание модели трансмиссии
 class TransmissionDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_transmission'
+    permission_required = 'service_book.view_transmission'
     model = Transmission
     template_name = 'reference.html'
     context_object_name = 'reference'
@@ -427,7 +427,7 @@ class TransmissionDetail(PermissionRequiredMixin, DetailView):
 
 # Справочное описание модели ведущего моста
 class DrivingAxleDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_drivingaxle'
+    permission_required = 'service_book.view_drivingaxle'
     model = DrivingAxle
     template_name = 'reference.html'
     context_object_name = 'reference'
@@ -435,7 +435,7 @@ class DrivingAxleDetail(PermissionRequiredMixin, DetailView):
 
 # Справочное описание модели управляемого моста
 class SteeringAxleDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_steeringaxle'
+    permission_required = 'service_book.view_steeringaxle'
     model = SteeringAxle
     template_name = 'reference.html'
     context_object_name = 'reference'
@@ -451,7 +451,7 @@ class ClientDetail(PermissionRequiredMixin, DetailView):
 
 # Справочное описание сервисной компании
 class ServiceCompanyDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_servicecompany'
+    permission_required = 'service_book.view_servicecompany'
     model = ServiceCompany
     template_name = 'reference.html'
     context_object_name = 'reference'
@@ -459,7 +459,7 @@ class ServiceCompanyDetail(PermissionRequiredMixin, DetailView):
 
 # Справочное описание организации, проводившей ТО
 class MaintenanceCompanyDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_maintenancecompany'
+    permission_required = 'service_book.view_maintenancecompany'
     model = MaintenanceCompany
     template_name = 'reference.html'
     context_object_name = 'reference'
@@ -467,7 +467,7 @@ class MaintenanceCompanyDetail(PermissionRequiredMixin, DetailView):
 
 # Справочное описание типа ТО
 class TypeMaintenanceDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_typemaintenance'
+    permission_required = 'service_book.view_typemaintenance'
     model = TypeMaintenance
     template_name = 'reference.html'
     context_object_name = 'reference'
@@ -475,7 +475,7 @@ class TypeMaintenanceDetail(PermissionRequiredMixin, DetailView):
 
 # Справочное описание узла отказа
 class RefusalNodeDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_refusalnode'
+    permission_required = 'service_book.view_refusalnode'
     model = RefusalNode
     template_name = 'reference.html'
     context_object_name = 'reference'
@@ -483,7 +483,7 @@ class RefusalNodeDetail(PermissionRequiredMixin, DetailView):
 
 # Справочное описание способа восстановления
 class RecoveryMethodDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_recoverymethod'
+    permission_required = 'service_book.view_recoverymethod'
     model = RecoveryMethod
     template_name = 'reference.html'
     context_object_name = 'reference'

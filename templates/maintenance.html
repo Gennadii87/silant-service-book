@@ -9,12 +9,12 @@
         <h2>Информация о техническом обслуживании</h2>
     </div>
     <div class="tabs">
-        {% if perms.silant.change_maintenance %}
+        {% if perms.service_book.change_maintenance %}
             <a class="inactive-tab" href="/maintenances/{{ maintenance.pk }}/edit/">
                 Редактировать
             </a>
         {% endif %}
-        {% if perms.silant.delete_maintenance %}
+        {% if perms.service_book.delete_maintenance %}
             <a class="inactive-tab" href="/maintenances/{{ maintenance.pk }}/delete/">
                 Удалить
             </a>

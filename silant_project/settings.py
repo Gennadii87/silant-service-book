@@ -48,7 +48,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'password_reset_notification.admin.AdminNotificationMiddleware',  # собственный слой для уведомления
 
 
