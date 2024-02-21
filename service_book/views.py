@@ -443,7 +443,7 @@ class SteeringAxleDetail(PermissionRequiredMixin, DetailView):
 
 # Справочное описание клиента
 class ClientDetail(PermissionRequiredMixin, DetailView):
-    permission_required = 'mySilant.view_steeringaxle'
+    permission_required = 'service_book.view_steeringaxle'
     model = Client
     template_name = 'reference.html'
     context_object_name = 'reference'
