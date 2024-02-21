@@ -627,6 +627,15 @@ h3 {
     margin: 0 0 0 0px;
     color: #163E6C;
 }
+@media screen and (max-width:700px) {
+    .button_search {
+        width: 100%;
+        height: 40px;
+        margin: 15px 0 0 0px;
+        color: #000000;
+        font-weight: 600;
+    }
+}
 .main-table_wrapper {
     display: flex;
     align-items: center;
