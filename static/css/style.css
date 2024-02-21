@@ -218,6 +218,7 @@ header {
     .button_login {
         width: 160px;
         height: 50px;
+        text-align: center;
     }
 }
 
@@ -268,6 +269,7 @@ header {
         width: 100px;
         height: 40px;
         font-size: 12px;
+        text-align: center;
     }
 }
     @media screen and (max-width: 1100px) {
@@ -320,13 +322,20 @@ header {
         width: 88px;
         height: 35px;
         font-size: 12px;
+        text-align: center;
     }
+}
+
+.info-item_auth{
+    display: flex;
 }
 
 .button_login {
     background-color: #D20A11;
     color: white;
     border-radius: 5px;
+    text-align: center;
+    justify-self: center;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -353,10 +362,13 @@ h3 {
 }
 .form-search {
     display: flex;
+    color: rgb(0, 0, 0);
     justify-content:center;
     background: linear-gradient(180deg, #d20a11, #350707);
 }
-
+.form-search > form > select {
+    margin: 1px;
+}
 @media screen and (min-width: 1555px) {
     .form-search {
         margin: 20px 5px 0 5px;
@@ -607,12 +619,13 @@ h3 {
 }
 
 
-.button_search{
+.button_search {
     width: 80px;
     height: 24px;
     background-color: #ffde70;
     border-radius: 3px;
-    margin: 0 0 0 10px;
+    margin: 0 0 0 0px;
+    color: #163E6C;
 }
 .main-table_wrapper {
     display: flex;
@@ -831,4 +844,10 @@ td:hover {
 
 .a_buttom{
     text-decoration: none;
+}
+select {
+    border-radius: 2px;
+}
+input {
+    border-radius: 2px;
 }

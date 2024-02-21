@@ -160,49 +160,4 @@
        {% endif %}
     {% endif %}
 </div>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script>
-    $(function(){
-        function resizeTableBox() {
-            $('.main-table').each(function(){
-                var boxWidth = $(this).outerWidth();
-                var tableWidth = $(this).find('table').prop('scrollWidth');
-                $(this).removeClass('scroll-left');
-                if (tableWidth > boxWidth) {
-                    $(this).addClass('scroll-right');
-                } else {
-                    $(this).removeClass('scroll-right');
-                }
-            });
-        }
-
-        resizeTableBox();
-        $(window).on('resize', function() {
-            resizeTableBox();
-        });
-
-        $('.main-table table').on('scroll', function() {
-            var parent = $(this).parent();
-            if ($(this).scrollLeft() + $(this).innerWidth() >= $(this)[0].scrollWidth) {
-                if (parent.hasClass('scroll-right')) {
-                    parent.removeClass('scroll-right');
-                }
-                parent.addClass('scroll-left');
-            } else if ($(this).scrollLeft() === 0) {
-                if (parent.hasClass('scroll-left')) {
-                    parent.removeClass('scroll-left');
-                }
-                parent.addClass('scroll-right');
-            } else {
-                if (!parent.hasClass('scroll-right')) {
-                    parent.addClass('scroll-right');
-                }
-                if (!parent.hasClass('scroll-left')) {
-                    parent.addClass('scroll-left');
-                }
-            }
-        });
-    });
-</script>
 {% endblock content %}

@@ -48,7 +48,7 @@
             </div>
             <div class="info-item_auth">
                 {% if not request.user.is_authenticated %}
-                    <a href="{% url 'account_login' %}"><button class="button_login">Авторизация</button></a>
+                    <a href="{% url 'account_login' %}"><button class="button_login">Войти</button></a>
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'account_logout' %}"><button class="button_login">Выйти</button></a>
