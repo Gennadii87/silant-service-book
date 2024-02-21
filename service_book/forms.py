@@ -78,7 +78,7 @@ class MaintenanceForm(forms.ModelForm):
             'maintenance_company',
         ]
         labels = {
-            'machine': 'Машина',
+            'machine': 'машина',
             'type': 'Вид ТО',
             'maintenance_date': 'Дата проведения ТО',
             'operating_time': 'Наработка, м/час',
@@ -106,6 +106,7 @@ class MaintenanceForm(forms.ModelForm):
             self.fields['machine'] = forms.ModelChoiceField(
                 queryset=Machine.objects.filter(service_company__user_link=user)
             )
+        self.fields['machine'].label = 'Машина'
 
     def clean(self):
         cleaned_data = super().clean()
@@ -170,10 +171,10 @@ class ClaimForm(forms.ModelForm):
         for company in companies:
             users_companies.append(company.user_link)
         if user in users_companies:
-            # Если сервисная компания - доступны только ее машины
             self.fields['machine'] = forms.ModelChoiceField(
                 queryset=Machine.objects.filter(service_company__user_link=user)
             )
+            self.fields['machine'].label = 'Машина'
 
     def clean(self):
         cleaned_data = super().clean()
@@ -185,7 +186,6 @@ class ClaimForm(forms.ModelForm):
                 raise ValidationError({
                     "recovery_date": "Дата восстановления должна быть не раньше даты отказа"
                 })
-            # Проверка корректности наработки
             if operating_time < 0:
                 raise ValidationError({
                     "operating_time": "Наработка должна быть положительным числом"
